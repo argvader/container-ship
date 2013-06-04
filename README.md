@@ -9,4 +9,4 @@ A Clojure client for Docker's Remote API.
 
 Copyright © 2013 Edward Paget
 
-Distributed under the GNU General Public License v3. See LICENSE.
+Distributed under the MIT License. See LICENSE.
