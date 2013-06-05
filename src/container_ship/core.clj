@@ -1,11 +1,12 @@
 (ns container-ship.core
-  (:require [clj-http.client :as client]))
+  (:require [clj-http.client :as client]
+            [clojure.string :as s]))
 
 (def ^:dynamic *docker-api-url* "http://localhost:4243")
 
 (defn connect!
   [url]
-  (swap! *docker-api-url* url))
+  (alter-var-root (var *docker-api-url*) (constantly (s/replace url #"/$" ""))))
 
 (defn containers
   "Lists containers as a lazy seq"
@@ -78,3 +79,20 @@
       (client/delete {:query-params options})
       :status
       (= 204)))
+
+(defn wait-container
+  "Blocks for container to return an exit status
+  Returns the status code."
+  [id]
+  (-> (str *docker-api-url* "/container/" id "/wait")
+      (client/get {:as :json})
+      (get-in [:body :StatusCode])))
+
+(defn images
+  "Returns all images"
+  []
+  (:body (client/get (str *docker-api-url* "/images/json") {:as :json})))
+
+(defn image
+  [id]
+  (:body (client/get (str *docker-api-url* "/images/" id "/json" {:as :json}))))
