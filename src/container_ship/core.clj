@@ -45,7 +45,7 @@
       :status
       (= 200)))
 
-(defn container-start
+(defn start-container
   "Starts a container returns true on success"
   [id]
   (start-stop id "start"))
