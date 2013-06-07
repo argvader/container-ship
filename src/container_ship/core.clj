@@ -43,7 +43,7 @@
   (-> (str *docker-api-url* "/containers/" id "/" command) 
       (client/post {:query-params options})
       :status
-      (= 200)))
+      (= 204)))
 
 (defn start-container
   "Starts a container returns true on success"
