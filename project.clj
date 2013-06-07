@@ -1,4 +1,4 @@
-(defproject container-ship "0.1.1"
+(defproject container-ship "0.1.2"
   :description "A Client for Docker Remote API."
   :url "http://github.com/edpaget/container-ship"
   :license {:name "MIT License"

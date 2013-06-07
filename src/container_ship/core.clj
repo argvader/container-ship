@@ -85,7 +85,7 @@
   Returns the status code."
   [id]
   (-> (str *docker-api-url* "/container/" id "/wait")
-      (client/get {:as :json})
+      (client/post {:as :json})
       (get-in [:body :StatusCode])))
 
 (defn images
